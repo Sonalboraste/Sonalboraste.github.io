@@ -1,7 +1,183 @@
 <!DOCTYPE html>
-<html>
-<head><title>My First Page</title></head>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dance Videos</title>
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --card-bg: #1a1a1a;
+    --text: #f1f1f1;
+    --accent: #ff4d67;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    padding: 40px 20px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  header h1 {
+    font-size: 2.5rem;
+    letter-spacing: 1px;
+  }
+  header p {
+    color: #999;
+    margin-top: 10px;
+  }
+  .category {
+    max-width: 1100px;
+    margin: 0 auto 60px auto;
+  }
+  .category h2 {
+    font-size: 1.5rem;
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+    margin-bottom: 20px;
+  }
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .video-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+  }
+  .video-card:hover {
+    transform: translateY(-5px);
+  }
+  .video-card iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    display: block;
+  }
+  .video-card .caption {
+    padding: 12px;
+    font-size: 0.95rem;
+    color: #ddd;
+  }
+</style>
+</head>
 <body>
-  <h1>Hello, World!</h1>
+
+<header>
+  <h1>My Dance Videos</h1>
+  <p>A collection of different dance workouts, organized by category</p>
+</header>
+
+<section class="category">
+  <h2>Merengue</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
+      <div class="caption">Le Gayi Le Gayi</div>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
+      <div class="caption">Bijuriya</div>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
+      <div class="caption">Bijuriya</div>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
+      <div class="caption">Bijuriya</div>
+    </div>
+  </div>
+</section>
+
+<section class="category">
+  <h2>Cumbia</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
+      <div class="caption">Pyaar Dilo Ka Mela Hai</div>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
+      <div class="caption">Mohaabat Dil Ka Sukoon Hai Aitbaar</div>
+    </div>
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
+      <div class="caption">Mohaabat Dil Ka Sukoon Hai Aitbaar</div>
+    </div>
+  </div>
+</section>
+
+<section class="category">
+  <h2>Reggaeton</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" allowfullscreen></iframe>
+      <div class="caption">Bom Diggy Diggy Bum</div>
+    </div>
+  </div>
+</section>
+
+<section class="category">
+  <h2>Salsa</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_5" allowfullscreen></iframe>
+      <div class="caption">Senorita</div>
+    </div>
+  </div>
+</section>
+
+<section class="category">
+  <h2>Bhangra</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" allowfullscreen></iframe>
+      <div class="caption">Sadi Gali</div>
+    </div>
+  </div>
+</section>
+<section class="category">
+  <h2>Garba</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" allowfullscreen></iframe>
+      <div class="caption">Dwarka No Naath</div>
+    </div>
+  </div>
+</section>
+<section class="category">
+  <h2>Marathi</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" allowfullscreen></iframe>
+      <div class="caption">Dwarka No Naath</div>
+    </div>
+  </div>
+</section>
+<section class="category">
+  <h2>Bollywood Freestyle</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" allowfullscreen></iframe>
+      <div class="caption">Dwarka No Naath</div>
+    </div>
+  </div>
+</section>
+<section class="category">
+  <h2>English/Spanish</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" allowfullscreen></iframe>
+      <div class="caption">Dwarka No Naath</div>
+    </div>
+  </div>
+</section>
 </body>
 </html>
