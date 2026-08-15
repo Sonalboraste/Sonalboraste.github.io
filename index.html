@@ -12,15 +12,92 @@
     --accent: #ff4d67;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
     background: var(--bg);
     color: var(--text);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    padding: 40px 20px;
   }
+
+  /* ---- Password gate ---- */
+  #gate {
+    position: fixed;
+    inset: 0;
+    background: #0f0f0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  #gate-box {
+    text-align: center;
+    padding: 30px;
+  }
+  #gate-box h2 {
+    margin-bottom: 16px;
+    font-size: 1.4rem;
+  }
+  #gate-box input {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 1rem;
+    width: 240px;
+  }
+  #gate-box button {
+    padding: 10px 18px;
+    margin-left: 8px;
+    border-radius: 6px;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  #gate-error {
+    color: var(--accent);
+    margin-top: 10px;
+    font-size: 0.9rem;
+    min-height: 20px;
+  }
+  #site-content {
+    display: none;
+  }
+  /* ---- End password gate ---- */
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #141414;
+    border-bottom: 1px solid #2a2a2a;
+    padding: 14px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+  nav a:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
   header {
     text-align: center;
-    margin-bottom: 50px;
+    padding: 50px 20px 40px 20px;
   }
   header h1 {
     font-size: 2.5rem;
@@ -30,9 +107,12 @@
     color: #999;
     margin-top: 10px;
   }
+
   .category {
     max-width: 1100px;
     margin: 0 auto 60px auto;
+    padding: 0 20px;
+    scroll-margin-top: 70px;
   }
   .category h2 {
     font-size: 1.5rem;
@@ -69,62 +149,71 @@
 </head>
 <body>
 
+<!-- Password gate -->
+<div id="gate">
+  <div id="gate-box">
+    <h2>Enter password to view</h2>
+    <input type="password" id="gate-input" placeholder="Password" />
+    <button onclick="checkPassword()">Enter</button>
+    <div id="gate-error"></div>
+  </div>
+</div>
+
+<!-- Site content, hidden until password is correct -->
+<div id="site-content">
+
+<nav>
+  <a href="#merengue">Merengue</a>
+  <a href="#cumbia">Cumbia</a>
+  <a href="#reggaeton">Reggaeton</a>
+  <a href="#salsa">Salsa</a>
+  <a href="#bhangra">Bhangra</a>
+  <a href="#garba">Garba</a>
+  <a href="#marathi">Marathi</a>
+  <a href="#bollywood-freestyle">Bollywood Freestyle</a>
+  <a href="#english-spanish">English/Spanish</a>
+</nav>
+
 <header>
   <h1>My Dance Videos</h1>
   <p>A collection of different dance workouts, organized by category</p>
 </header>
 
-<section class="category">
+<section class="category" id="merengue">
   <h2>Merengue</h2>
   <div class="video-grid">
     <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
       <div class="caption">Le Gayi Le Gayi</div>
     </div>
     <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
-      <div class="caption">Bijuriya</div>
-    </div>
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
-      <div class="caption">Bijuriya</div>
-    </div>
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
       <div class="caption">Bijuriya</div>
     </div>
   </div>
 </section>
 
-<section class="category">
+<section class="category" id="cumbia">
   <h2>Cumbia</h2>
   <div class="video-grid">
     <div class="video-card">
       <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
       <div class="caption">Pyaar Dilo Ka Mela Hai</div>
     </div>
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
-      <div class="caption">Mohaabat Dil Ka Sukoon Hai Aitbaar</div>
-    </div>
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
-      <div class="caption">Mohaabat Dil Ka Sukoon Hai Aitbaar</div>
-    </div>
   </div>
 </section>
 
-<section class="category">
+<section class="category" id="reggaeton">
   <h2>Reggaeton</h2>
   <div class="video-grid">
     <div class="video-card">
       <iframe src="https://www.youtube.com/embed/VIDEO_ID_4" allowfullscreen></iframe>
-      <div class="caption">Bom Diggy Diggy Bum</div>
+      <div class="caption">Bom Diggy Diggy</div>
     </div>
   </div>
 </section>
 
-<section class="category">
+<section class="category" id="salsa">
   <h2>Salsa</h2>
   <div class="video-grid">
     <div class="video-card">
@@ -134,7 +223,7 @@
   </div>
 </section>
 
-<section class="category">
+<section class="category" id="bhangra">
   <h2>Bhangra</h2>
   <div class="video-grid">
     <div class="video-card">
@@ -143,41 +232,76 @@
     </div>
   </div>
 </section>
-<section class="category">
+
+<section class="category" id="garba">
   <h2>Garba</h2>
   <div class="video-grid">
     <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_7" allowfullscreen></iframe>
       <div class="caption">Dwarka No Naath</div>
     </div>
   </div>
 </section>
-<section class="category">
+
+<section class="category" id="marathi">
   <h2>Marathi</h2>
   <div class="video-grid">
     <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" allowfullscreen></iframe>
-      <div class="caption">Dwarka No Naath</div>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_8" allowfullscreen></iframe>
+      <div class="caption">Video title goes here</div>
     </div>
   </div>
 </section>
-<section class="category">
+
+<section class="category" id="bollywood-freestyle">
   <h2>Bollywood Freestyle</h2>
   <div class="video-grid">
     <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" allowfullscreen></iframe>
-      <div class="caption">Dwarka No Naath</div>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_9" allowfullscreen></iframe>
+      <div class="caption">Video title goes here</div>
     </div>
   </div>
 </section>
-<section class="category">
+
+<section class="category" id="english-spanish">
   <h2>English/Spanish</h2>
   <div class="video-grid">
     <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/VIDEO_ID_6" allowfullscreen></iframe>
-      <div class="caption">Dwarka No Naath</div>
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID_10" allowfullscreen></iframe>
+      <div class="caption">Video title goes here</div>
     </div>
   </div>
 </section>
+
+</div>
+<!-- end site-content -->
+
+<script>
+  const SITE_PASSWORD = "BollywoodFitness2025#";
+
+  function checkPassword() {
+    const input = document.getElementById('gate-input').value;
+    const error = document.getElementById('gate-error');
+    if (input === SITE_PASSWORD) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('site-content').style.display = 'block';
+      sessionStorage.setItem('siteUnlocked', 'true');
+    } else {
+      error.textContent = 'Incorrect password, try again.';
+    }
+  }
+
+  // Allow pressing Enter to submit
+  document.getElementById('gate-input').addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') checkPassword();
+  });
+
+  // Stay unlocked for the rest of the browser tab session
+  if (sessionStorage.getItem('siteUnlocked') === 'true') {
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('site-content').style.display = 'block';
+  }
+</script>
+
 </body>
 </html>
