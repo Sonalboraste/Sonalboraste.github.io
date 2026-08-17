@@ -1,0 +1,23 @@
+{
+  "name": "sonalboraste.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sonalboraste/Sonalboraste.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Sonalboraste/Sonalboraste.github.io/issues"
+  },
+  "homepage": "https://github.com/Sonalboraste/Sonalboraste.github.io#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^26.2.0"
+  }
+}
