@@ -24,9 +24,9 @@ test('correct password reveals the videos', async ({ page }) => {
   await expect(page.locator('#site-content')).toBeVisible();
 });
 
-test('nav bar has all nine categories', async ({ page }) => {
+test('nav bar has all twelve categories', async ({ page }) => {
   await page.goto(SITE);
   await page.fill('#gate-input', PASSWORD);
   await page.click('#gate-box button');
-  await expect(page.locator('nav a')).toHaveCount(9);
+  await expect(page.locator('nav a')).toHaveCount(12);
 });
