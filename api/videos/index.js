@@ -65,7 +65,7 @@ module.exports = async function (context, req) {
         }
 
         const sqlRequest = new Request(
-          "SELECT Category, Title, YouTubeId, SortOrder FROM Videos ORDER BY Category, SortOrder",
+          "SELECT Category, Title, YouTubeId, SortOrder FROM dbo.Videos ORDER BY Category, SortOrder",
           (err, rowCount, rows) => {
             if (err) {
               context.res = {
