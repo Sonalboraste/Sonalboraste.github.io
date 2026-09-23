@@ -145,6 +145,29 @@
     font-size: 0.95rem;
     color: #ddd;
   }
+
+  /* ---- Video loading status (new) ---- */
+  #video-status {
+    max-width: 1100px;
+    margin: 0 auto 40px auto;
+    padding: 0 20px;
+    text-align: center;
+    color: #999;
+  }
+  #video-status button {
+    margin-top: 12px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .coming-soon {
+    color: #777;
+    font-style: italic;
+  }
 </style>
 </head>
 <body>
@@ -179,104 +202,53 @@
   <p>A collection of different dance workouts, organized by category</p>
 </header>
 
-<section class="category" id="merengue">
+<!-- Shows "Loading videos..." or an error with a Try again button -->
+<div id="video-status"></div>
+
+<!-- Each section starts empty; the script below fills it from the API -->
+<section class="category" id="merengue" data-category="Merengue">
   <h2>Merengue</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
-      <div class="caption">Le Gayi Le Gayi</div>
-    </div>
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
-      <div class="caption">Bijuriya</div>
-    </div>
-  </div>
+  <div class="video-grid"></div>
 </section>
 
-<section class="category" id="cumbia">
+<section class="category" id="cumbia" data-category="Cumbia">
   <h2>Cumbia</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/-a2lXZnBkes" allowfullscreen></iframe>
-      <div class="caption">Aaj Ki Raat</div>
-    </div>
-  </div>
+  <div class="video-grid"></div>
 </section>
 
-<section class="category" id="reggaeton">
+<section class="category" id="reggaeton" data-category="Reggaeton">
   <h2>Reggaeton</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
-      <div class="caption">Bom Diggy Diggy</div>
-    </div>
-  </div>
+  <div class="video-grid"></div>
 </section>
 
-<section class="category" id="salsa">
+<section class="category" id="salsa" data-category="Salsa">
   <h2>Salsa</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
-      <div class="caption">Senorita</div>
-    </div>
-  </div>
+  <div class="video-grid"></div>
 </section>
 
-<section class="category" id="bhangra">
+<section class="category" id="bhangra" data-category="Bhangra">
   <h2>Bhangra</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/Bv45XCWHcvs" allowfullscreen></iframe>
-      <div class="caption">Sadi Gali</div>
-    </div>
-  </div>
+  <div class="video-grid"></div>
 </section>
 
-<section class="category" id="garba">
+<section class="category" id="garba" data-category="Garba">
   <h2>Garba</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
-      <div class="caption">Dwarka No Naath</div>
-    </div>
-  </div>
+  <div class="video-grid"></div>
 </section>
 
-<section class="category" id="marathi">
+<section class="category" id="marathi" data-category="Marathi">
   <h2>Marathi</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
-      <div class="caption">Video title goes here</div>
-    </div>
-  </div>
+  <div class="video-grid"></div>
 </section>
 
-<section class="category" id="bollywood-freestyle">
+<section class="category" id="bollywood-freestyle" data-category="Bollywood Freestyle">
   <h2>Bollywood Freestyle</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/fvZQAgKNovE" allowfullscreen></iframe>
-      <div class="caption">Ankh Mare</div>
-    </div>
-  </div>
-  <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/2agJfazPtHg" allowfullscreen></iframe>
-      <div class="caption">Nashe Si Chadh Gayi</div>
-    </div>
-  </div>
+  <div class="video-grid"></div>
 </section>
 
-<section class="category" id="english-spanish">
+<section class="category" id="english-spanish" data-category="English/Spanish">
   <h2>English/Spanish</h2>
-  <div class="video-grid">
-    <div class="video-card">
-      <iframe src="https://www.youtube.com/embed/1tYtPlRWZpA" allowfullscreen></iframe>
-      <div class="caption">Video title goes here</div>
-    </div>
-  </div>
+  <div class="video-grid"></div>
 </section>
 
 </div>
@@ -307,6 +279,84 @@
     document.getElementById('gate').style.display = 'none';
     document.getElementById('site-content').style.display = 'block';
   }
+
+  // ---- Load videos from the API (new) ----
+  const videosApiUrl = 'https://white-bush-0674ea910.4.azurestaticapps.net/api/videos';
+
+  async function loadVideos() {
+    const videoStatus = document.getElementById('video-status');
+    videoStatus.textContent = 'Loading videos...';
+
+    try {
+      const response = await fetch(videosApiUrl);
+      if (!response.ok) {
+        throw new Error('API returned status ' + response.status);
+      }
+      const videoList = await response.json();
+      renderVideos(videoList);
+      videoStatus.textContent = '';
+    } catch (loadError) {
+      showLoadError(loadError);
+    }
+  }
+
+  function renderVideos(videoList) {
+    const categorySections = document.querySelectorAll('section.category');
+
+    categorySections.forEach(function (categorySection) {
+      const categoryName = categorySection.dataset.category;
+      const videoGrid = categorySection.querySelector('.video-grid');
+      videoGrid.innerHTML = '';
+
+      const categoryVideos = videoList.filter(function (video) {
+        return video.Category === categoryName;
+      });
+
+      if (categoryVideos.length === 0) {
+        const comingSoonMessage = document.createElement('p');
+        comingSoonMessage.className = 'coming-soon';
+        comingSoonMessage.textContent = 'Coming soon';
+        videoGrid.appendChild(comingSoonMessage);
+        return;
+      }
+
+      categoryVideos.forEach(function (video) {
+        const videoCard = document.createElement('div');
+        videoCard.className = 'video-card';
+
+        const videoFrame = document.createElement('iframe');
+        videoFrame.src = 'https://www.youtube.com/embed/' + encodeURIComponent(video.YouTubeId);
+        videoFrame.allowFullscreen = true;
+
+        const videoCaption = document.createElement('div');
+        videoCaption.className = 'caption';
+        videoCaption.textContent = video.Title;
+
+        videoCard.appendChild(videoFrame);
+        videoCard.appendChild(videoCaption);
+        videoGrid.appendChild(videoCard);
+      });
+    });
+  }
+
+  function showLoadError(loadError) {
+    console.error('Could not load videos:', loadError);
+    const videoStatus = document.getElementById('video-status');
+    videoStatus.innerHTML = '';
+
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = 'Could not load videos. The database may be waking up.';
+
+    const tryAgainButton = document.createElement('button');
+    tryAgainButton.id = 'try-again-button';
+    tryAgainButton.textContent = 'Try again';
+    tryAgainButton.addEventListener('click', loadVideos);
+
+    videoStatus.appendChild(errorMessage);
+    videoStatus.appendChild(tryAgainButton);
+  }
+
+  loadVideos();
 </script>
 
 </body>
