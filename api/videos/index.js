@@ -12,7 +12,8 @@ const config = {
   options: {
     database: process.env.SQL_DATABASE,
     encrypt: true,
-    rowCollectionOnRequestCompletion: true
+    rowCollectionOnRequestCompletion: true,
+    connectTimeout: 30000
   }
 };
 
