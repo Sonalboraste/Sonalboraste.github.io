@@ -17,6 +17,11 @@ const config = {
   }
 };
 
+const responseHeaders = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "https://sonalboraste.github.io"
+};
+
 module.exports = async function (context, req) {
   return new Promise((resolve) => {
     try {
@@ -26,7 +31,7 @@ module.exports = async function (context, req) {
         if (err) {
           context.res = {
             status: 500,
-            headers: { "Content-Type": "application/json" },
+            headers: responseHeaders,
             body: {
               error: "Connection failed",
               message: err.message,
@@ -48,7 +53,7 @@ module.exports = async function (context, req) {
             if (err) {
               context.res = {
                 status: 500,
-                headers: { "Content-Type": "application/json" },
+                headers: responseHeaders,
                 body: { error: "Query failed", message: err.message }
               };
               connection.close();
@@ -65,7 +70,7 @@ module.exports = async function (context, req) {
 
             context.res = {
               status: 200,
-              headers: { "Content-Type": "application/json" },
+              headers: responseHeaders,
               body: videos
             };
             connection.close();
@@ -80,7 +85,7 @@ module.exports = async function (context, req) {
     } catch (outerErr) {
       context.res = {
         status: 500,
-        headers: { "Content-Type": "application/json" },
+        headers: responseHeaders,
         body: { error: "Unhandled exception", message: outerErr.message }
       };
       resolve();
