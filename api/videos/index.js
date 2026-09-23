@@ -22,7 +22,24 @@ const responseHeaders = {
   "Access-Control-Allow-Origin": "https://sonalboraste.github.io"
 };
 
+const cacheDurationInSeconds = 300;
+let cachedVideoList = null;
+let cacheExpiresAtMilliseconds = 0;
+
+const successResponseHeaders = {
+  ...responseHeaders,
+  "Cache-Control": "public, max-age=" + cacheDurationInSeconds
+};
+
 module.exports = async function (context, req) {
+    if (cachedVideoList !== null && Date.now() < cacheExpiresAtMilliseconds) {
+    context.res = {
+      status: 200,
+      headers: { ...successResponseHeaders, "X-Cache": "HIT" },
+      body: cachedVideoList
+    };
+    return;
+  }
   return new Promise((resolve) => {
     try {
       const connection = new Connection(config);
@@ -68,9 +85,13 @@ module.exports = async function (context, req) {
               SortOrder: row[3].value
             }));
 
+            
+            cachedVideoList = videos;
+            cacheExpiresAtMilliseconds = Date.now() + cacheDurationInSeconds * 1000;
+
             context.res = {
               status: 200,
-              headers: responseHeaders,
+              headers: { ...successResponseHeaders, "X-Cache": "MISS" },
               body: videos
             };
             connection.close();
