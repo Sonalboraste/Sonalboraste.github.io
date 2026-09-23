@@ -1,5 +1,7 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "dependencies": {}
+  "dependencies": {
+    "tedious": "^18.6.1"
+  }
 }
